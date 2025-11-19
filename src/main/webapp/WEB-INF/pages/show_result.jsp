@@ -27,7 +27,7 @@
                             <img src="images/edit.jpeg" width="30" height="30">
                         </a>
                         &nbsp;&nbsp;&nbsp;
-                        <a href="delete?no=${vo.aid}">
+                        <a href="delete?no=${vo.aid}" onclick="return confirm('Do you want to delete the record ?')">
                             <img src="images/delete.jpeg" width="30" height="30">
                         </a>
                     </td>
@@ -41,8 +41,8 @@
 </c:choose>
 
 <br><br>
-
-
+<h1 style="color:green;text-align: center "> ${resultMsg}</h1>
+<br><br>
 <h1 style="color:red; text-align: center">
     <a href="add">
         Add Actor
