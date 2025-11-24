@@ -74,17 +74,23 @@ public class ActorOperationsController {
 			 }*/
           @PostMapping("/add") //POST (P)
 		   public String saveActor(@ModelAttribute("actor") ActorVO vo,
-		 		                                 HttpSession ses )
+		 		                                 RedirectAttributes attrs, Map<String, Object> map)
 		   {
+       try { 	  
 		 	  System.out.println("ActorOperationsController.saveActor()");
 		 	  //use service
 		 	  String msg=actorService.saveActor(vo);
 		 	  //keep results in model attributes
-		 	  ses.setAttribute("resultMsg", msg);
+		 	  attrs.addFlashAttribute("resultMsg", msg);
 		 	  //return LVN
 		 	  return "redirect:report";   //Redirect (R)
 		   }
-          
+       catch(Exception e) {
+    	   System.out.println(e.getMessage());
+    	   map.put("errorMsg",e.getMessage());
+    	   return "show_error";
+       }
+ }    
 			  @GetMapping("/edit") //for launching edit actor form page
 			   public String editActorFormPage(@RequestParam("no") Integer no,
 			 		                                                @ModelAttribute("actor") ActorVO actorVO)
